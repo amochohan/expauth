@@ -18,7 +18,7 @@ In your composer.json file, add:
 
 ```
     "require": {
-       "drawmyattention/expauth": "0.*"
+       "drawmyattention/expauth": "1.0.0"
     }
 ```
 
