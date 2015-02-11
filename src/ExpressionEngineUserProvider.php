@@ -5,6 +5,7 @@ namespace DrawMyAttention\ExpAuth;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use App\User;
 
 class ExpressionEngineUserProvider extends EloquentUserProvider{
 
@@ -25,8 +26,10 @@ class ExpressionEngineUserProvider extends EloquentUserProvider{
     {
         $plain                  = $credentials['password'];
         $options = array();
-        $options['salt']        = $user->salt;
-        $options['byte_size']   = strlen($user->getAuthPassword());
+        if ($user instanceof App\User) {
+            $options['salt']        = $user->salt;
+            $options['byte_size']   = strlen($user->getAuthPassword());
+        }
         return $this->hasher->check($plain, $user->getAuthPassword(), $options);
     }
 
