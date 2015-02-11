@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drawmyattention/expauth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/drawmyattention/expauth/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/drawmyattention/expauth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/drawmyattention/expauth/build-status/master)
+
 #Laravel 5 Expression Engine User Authentication
 
 Allows you to switch your Expression Engine website to Laravel, by handling the authentication of Expression Engine members. This package allows you to easily build a front end in Laravel for Expression Engine websites, without worrying about how existing members logins and registrations will work.
