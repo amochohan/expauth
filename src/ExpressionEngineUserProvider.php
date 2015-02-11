@@ -25,8 +25,10 @@ class ExpressionEngineUserProvider extends EloquentUserProvider{
     {
         $plain                  = $credentials['password'];
         $options = array();
-        $options['salt']        = $user->salt;
-        $options['byte_size']   = strlen($user->getAuthPassword());
+        if ($user instanceof User) {
+            $options['salt']        = $user->salt;
+            $options['byte_size']   = strlen($user->getAuthPassword());
+        }
         return $this->hasher->check($plain, $user->getAuthPassword(), $options);
     }
 
