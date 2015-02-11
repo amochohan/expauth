@@ -52,10 +52,13 @@ class ExpressionEngineHasherTest extends PHPUnit_Framework_TestCase{
         $this->assertTrue($hasher->check($plain, $hashed));
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testPreventsAgainstMd5Collisions()
     {
         $hasher = new DrawMyAttention\ExpAuth\ExpressionEngineHasher;
-        $this->assertFalse($hasher->make('6l4QzmysmLR4o6sRMODW0jhe54ogIAVHZ7sQVvIvh7hzGurXA5KytS3bwM7ayn22KfkZciNkyE3pM315b1hyVOjCN8p474JR2EaJBZu9BR3Yz7T3AKrNBobDVMtvBvhIe7FWO2TsAKkwwCsx1cLM7wGGJzeBUXpchPBThJhZDcOlw4UzDLNoMjHekn6cq57nb2E80y9yhjzKfu6Ktk3nuOqjvRQw5kqM8q1xMjZEuNEfjkxVgOfTC8c1JCw'));
+        $hasher->make('6l4QzmysmLR4o6sRMODW0jhe54ogIAVHZ7sQVvIvh7hzGurXA5KytS3bwM7ayn22KfkZciNkyE3pM315b1hyVOjCN8p474JR2EaJBZu9BR3Yz7T3AKrNBobDVMtvBvhIe7FWO2TsAKkwwCsx1cLM7wGGJzeBUXpchPBThJhZDcOlw4UzDLNoMjHekn6cq57nb2E80y9yhjzKfu6Ktk3nuOqjvRQw5kqM8q1xMjZEuNEfjkxVgOfTC8c1JCw');
     }
 
     /**
