@@ -24,6 +24,7 @@ class ExpressionEngineUserProvider extends EloquentUserProvider{
     public function validateCredentials(UserContract $user, array $credentials)
     {
         $plain                  = $credentials['password'];
+        $options = array();
         $options['salt']        = $user->salt;
         $options['byte_size']   = strlen($user->getAuthPassword());
         return $this->hasher->check($plain, $user->getAuthPassword(), $options);
