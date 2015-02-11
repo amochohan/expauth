@@ -62,4 +62,4 @@ Authentication works in exactly the same way as Laravel's regular auth methods.
 
 ## Licence and credit
 
-This package is open-sourced software licensed under the MIT license. Many thanks to the original package upon which this was based (https://github.com/pixelfusion/ExpAuth) by PixelFusion.
+This package is open-sourced software licensed under the MIT license. Many thanks to the original package (pixelfusion/ExpAuth) upon which this was based, by PixelFusion.
