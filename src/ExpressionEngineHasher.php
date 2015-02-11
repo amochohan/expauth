@@ -45,7 +45,7 @@ class ExpressionEngineHasher implements HasherContract{
         // we artificially limit their password to reasonable size.
         if ( ! $value || strlen($value) > 250)
         {
-            return false;
+            throw new Exception("Hash length exceeds operable length.");
         }
 
         // If no hash algorithm is explicitly specified, use bcrypt
