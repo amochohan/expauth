@@ -1,0 +1,31 @@
+{
+    "name": "drawmyattention/expauth",
+    "description": "A Laravel 5 authentication driver that supports Expression Engine's membership system.. New users will default to Laravel's bcrypt encryption (extremely secure), but existing users who have registered using Expression Engine can also be authenticated. Also handles their reset password procedure.",
+    "homepage": "https://github.com/tymondesigns/jwt-auth",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amo Chohan",
+            "email": "amo.chohan@gmail.com",
+            "homepage": "http://www.drawmyattention.co.uk",
+            "role": "PHP Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "phpunit/phpunit": "~4.7@dev"
+    },
+    "require-dev": {
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "DrawMyAttention\\ExpAuth\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DrawMyAttention\\ExpAuth\\Test\\": "tests"
+        }
+    }
+}
