@@ -15,8 +15,6 @@
         "php": ">=5.5.0",
         "phpunit/phpunit": "~4.7@dev"
     },
-    "require-dev": {
-    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
