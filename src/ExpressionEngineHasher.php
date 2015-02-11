@@ -41,26 +41,12 @@ class ExpressionEngineHasher implements HasherContract{
      */
     public function make($value, array $options = array())
     {
-        // Even for md5, collisions usually happen above 1024 bits, so
-        // we artificially limit their password to reasonable size.
-        if ( ! $value || strlen($value) > 250)
-        {
-            throw new Exception("Hash length exceeds operable length.");
-        }
+        $this->guardAgainstMd5Collisions($value);
 
         // If no hash algorithm is explicitly specified, use bcrypt
         if (!isset($options['byte_size']) || $options['byte_size'] === false)
         {
-            $cost = isset($options['rounds']) ? $options['rounds'] : $this->rounds;
-
-            $hash = password_hash($value, PASSWORD_BCRYPT, array('cost' => $cost));
-
-            if ($hash === false)
-            {
-                throw new Exception("Bcrypt hashing not supported.");
-            }
-
-            return $hash;
+            return $this->hashUsingBcrypt($value, $options);
         }
         elseif ( ! isset($this->hash_algorithms[$options['byte_size']]))
         {
@@ -71,22 +57,75 @@ class ExpressionEngineHasher implements HasherContract{
         // No salt? (not even blank), we'll regenerate
         if ($options['salt'] === false)
         {
-            $options['salt'] = '';
-            // The salt should never be displayed, so any ascii character can be used for higher security
-            for ($i = 0; $i < $options['byte_size']; $i++)
-            {
-                $options['salt'] .= chr(mt_rand(33, 126));
-            }
+            $options['salt'] = $this->generateSalt($options['byte_size']);
         }
         elseif (strlen($options['salt']) !== $options['byte_size'])
         {
             // A salt with an invalid length was provided. This can happen if
             // old code resets a new value, ignore it.
-
             $options['salt'] = '';
         }
+
         return hash($this->hash_algorithms[$options['byte_size']], $options['salt'].$value);
 
+    }
+
+    /**
+     * Ensure that a hash doesn't exceed an operatble length.
+     *
+     * MD5 collisions usually happen above 1024 bits, so
+     * we artificially limit their password to reasonable size.
+     *
+     * @access private
+     * @param string $value
+     * @throws Exception
+     */
+    private function guardAgainstMd5Collisions($value)
+    {
+        if (!$value || strlen($value) > 250)
+        {
+            throw new Exception("Hash length exceeds operable length.");
+        }
+    }
+
+    /**
+     * Generate a new SALT used for hashing the password.
+     *
+     * The salt should never be displayed, so any ascii character can be used for higher security.
+     *
+     * @param $byte_size
+     * @return string
+     */
+    private function generateSalt($byte_size)
+    {
+        $salt = '';
+        for ($i = 0; $i < $byte_size; $i++)
+        {
+            $salt .= chr(mt_rand(33, 126));
+        }
+        return $salt;
+    }
+
+    /**
+     * Hash a password using Bcrypt.
+     *
+     * @param string $value
+     * @param array $options
+     * @return string
+     * @throws Exception
+     */
+    private function hashUsingBcrypt($value, $options)
+    {
+        $cost = isset($options['rounds']) ? $options['rounds'] : $this->rounds;
+
+        $hash = password_hash($value, PASSWORD_BCRYPT, array('cost' => $cost));
+
+        if ($hash === false)
+        {
+            throw new Exception("Bcrypt hashing not supported.");
+        }
+
+        return $hash;
     }
 
     /**
