@@ -96,7 +96,7 @@ class ExpressionEngineHasher implements HasherContract{
      * @param $byte_size
      * @return string
      */
-    private function generateSalt($byte_size)
+    public function generateSalt($byte_size = 128)
     {
         $salt = '';
         for ($i = 0; $i < $byte_size; $i++)
