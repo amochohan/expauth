@@ -5,7 +5,7 @@ namespace DrawMyAttention\ExpAuth;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 
-class ExpressionEngineUserProvider extends EloquentUserProvider{
+class ExpressionEngineUserProvider extends EloquentUserProvider {
 
 
     public function __construct(HasherContract $hasher, $model)
@@ -16,7 +16,7 @@ class ExpressionEngineUserProvider extends EloquentUserProvider{
     /**
      * Validate a user against the given credentials.
      *
-     * @param EEUserContract|\Illuminate\Contracts\Auth\AuthenticatableContract $user
+     * @param EEUserContract|\Illuminate\Contracts\Auth\Authenticatable $user
      * @param  array $credentials
      * @return bool
      */
