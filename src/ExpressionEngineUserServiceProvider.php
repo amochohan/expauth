@@ -9,10 +9,9 @@ class ExpressionEngineUserServiceProvider extends ServiceProvider{
 
     public function boot()
     {
-        Auth::extend('ExpressionEngineAuth', function($app)
+        Auth::provider('ExpressionEngineAuth', function($app, array $config)
         {
-            $model = $this->app['config']['auth.model'];
-            return new ExpressionEngineUserProvider($this->app['hash'], $model);
+            return new ExpressionEngineUserProvider($this->app['hash'], $config['model']);
         });
     }
 
