@@ -1,8 +1,10 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drawmyattention/expauth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/drawmyattention/expauth/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/drawmyattention/expauth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/drawmyattention/expauth/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/drawmyattention/expauth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/drawmyattention/expauth/?branch=master) [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](http://www.opensource.org/licenses/MIT)
 
-#Laravel 5 Expression Engine User Authentication
+#Laravel 5.2 Expression Engine User Authentication
 
 Allows you to switch your Expression Engine website to Laravel, by handling the authentication of Expression Engine members. This package allows you to easily build a front end in Laravel for Expression Engine websites, without worrying about how existing members logins and registrations will work.
+
+**For Laravel 5.0 and 5.1 support, please checkout the master branch.**
 
 ## What it does
 
@@ -18,7 +20,7 @@ In your composer.json file, add:
 
 ```
     "require": {
-       "drawmyattention/expauth": "1.0.*"
+       "drawmyattention/expauth": "1.2.*"
     }
 ```
 
@@ -35,16 +37,22 @@ and (optionally) comment out
     //'Illuminate\Hashing\HashServiceProvider',
 ```
 
-In config/auth.php, change
+In config/auth.php, change your providers array
 
 ```
-    'driver' => 'eloquent',
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\User::class,
+    ],
 ```
 
 to
 
 ```
-    'driver' => 'ExpressionEngineAuth',
+    'users' => [
+        'driver' => 'ExpressionEngineAuth',
+        'model' => App\User::class,
+    ],
 ```
 
 In your User model, make sure that you set the table and primary key fields as per the Expression Engine schema:
