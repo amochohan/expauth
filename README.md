@@ -4,6 +4,8 @@
 
 Allows you to switch your Expression Engine website to Laravel, by handling the authentication of Expression Engine members. This package allows you to easily build a front end in Laravel for Expression Engine websites, without worrying about how existing members logins and registrations will work.
 
+**For Laravel 5.2 support, please checkout the 5.2 branch.**
+
 ## What it does
 
 Expression Engine uses a number of different hashing algorithms, such as SHA512, SHA256, SHA1 and even MD5 (*shudder*), whilst Laravel 5 uses the much more secure bcrypt.
@@ -18,7 +20,7 @@ In your composer.json file, add:
 
 ```
     "require": {
-       "drawmyattention/expauth": "1.0.*"
+       "drawmyattention/expauth": "1.1.*"
     }
 ```
 
