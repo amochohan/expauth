@@ -49,7 +49,7 @@ to
     'driver' => 'ExpressionEngineAuth',
 ```
 
-In your User model, make sure that you set the table and primary key fields as per the Expression Engine schema:
+In your User model, make sure to replace AuthenticatableContract with EEUserContract and that you set the table and primary key fields as per the Expression Engine schema:
 
 ```
     protected $table = 'exp_members';
